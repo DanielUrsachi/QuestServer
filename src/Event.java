@@ -1,13 +1,14 @@
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  * Created by Dan on 11-Jun-17.
  */
-public class Event {
-    public String name;
-    public int time;
-    public int nr;
-    private static Vector<String> passes ;
+public class Event implements Serializable {
+    private String name;
+    private int time;
+    private int nr;
+    public Vector<String> passes ;
 
 
     Event(String name, Vector<String> passes, int time, int nr){
@@ -54,8 +55,11 @@ public class Event {
 
     }
     public String getPass( int i){
-        return this.passes.get(i);
+        return this.passes.get(i-1);
 
+    }
+    public String getName(){
+        return this.name;
     }
 
 
