@@ -58,6 +58,7 @@ public class ClientCreator implements Serializable {
 //                out.flush();
 
             oos.writeObject(event);
+
                 while (true){
                     String msg2 = in.readUTF();
                     if (msg2.equals("succes")){

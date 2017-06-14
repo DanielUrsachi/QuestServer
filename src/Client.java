@@ -27,8 +27,11 @@ public class Client {
                 out.writeUTF(msg);
                 out.flush();
 
+
+               // Thread.sleep(10000);
+
                 String msg2 = in.readUTF();
-                System.out.println("qqqq" + msg2 + "qqq");
+                System.out.println("return from server: " + msg2 );
             }
 
         } catch (Exception e) {

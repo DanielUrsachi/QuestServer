@@ -34,7 +34,7 @@ public class ServerSide {
                             System.out.println(event.getName() + " a fost inregistrat cu succes");
                             //System.out.println(event.getPass(1));
                             out.writeUTF("succes");
-                            ServerGroup.Group(event.getName());
+                            //ServerGroup.Group(event.getName());
 
                         }
                         else {
