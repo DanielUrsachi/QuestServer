@@ -1,3 +1,4 @@
+import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,10 +8,15 @@ import java.util.Vector;
  * Created by Dan on 11-Jun-17.
  */
 public class ServerSide {
-
+    public static Vector<String> groups;
+    public EventList eventList;
 
     public static void main(String[] args) {
         Vector<String> groups = new Vector<>();
+
+        EventList eventList = new EventList();
+    Saving.cleanEventList();
+
 
         try {
             int port = 7878;
@@ -31,9 +37,12 @@ public class ServerSide {
                         Event event = (Event) ois.readObject();
                         if(!groups.contains(event.getName())){
                             groups.add(event.getName());
+                            eventList.addEventListItem(event);
                             System.out.println(event.getName() + " a fost inregistrat cu succes");
                             //System.out.println(event.getPass(1));
                             out.writeUTF("succes");
+                            Saving.saveEventList(eventList);
+                            //ServerGroups.sendInfo(eventList);
                             //ServerGroup.Group(event.getName());
 
                         }
@@ -47,6 +56,8 @@ public class ServerSide {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (JAXBException e) {
                         e.printStackTrace();
                     }
 

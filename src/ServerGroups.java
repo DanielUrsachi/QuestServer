@@ -1,15 +1,29 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import javax.xml.bind.JAXBException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Vector;
 
 /**
  * Created by Dan on 13-Jun-17.
  */
 public class ServerGroups {
+   // public Vector<String> groups = new Vector<String>();;
+   // public static EventList eventList = new EventList();;
+
+
+
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
+
+       // Vector<String> groups = new Vector<>();
+
+        //EventList eventList = new EventList();
+
+
+
+
+
         String nume1 = "nume1";
         String nume2 = "nume2";
         try {
@@ -21,14 +35,25 @@ public class ServerGroups {
                 Socket socket = serverSocket.accept();
                 DataInputStream in = new DataInputStream(socket.getInputStream());
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
 
                 Thread t = new Thread(()->{
                     while (true) {
                         try {
+                            EventList eventList = Saving.loadEventList();
+                            Vector<String> v = eventList.getNames();
+
+                            oos.writeObject(v);
+
+
+
                             String msg = in.readUTF();
-                            System.out.println(" User -->" + msg + "<--");
-                            if (msg.equals("nume1")){
+                            System.out.println(" Room -->" + msg);
+                            Event event = eventList.getElementListName(msg);
+                            oos.writeObject(event);
+
+                            /*if (msg.equals("nume1")){
                                 System.out.println("primuuuuuu");
                                 Thread.sleep(10000);
                                 out.writeUTF("primu!" );
@@ -39,7 +64,7 @@ public class ServerGroups {
                                 Thread.sleep(1000);
                                 out.writeUTF("doilea!" );
 
-                            }
+                            }*/
 
 
 
@@ -49,7 +74,8 @@ public class ServerGroups {
 
                         } catch (IOException e) {
                             e.printStackTrace();
-                        } catch (InterruptedException e) {
+
+                        } catch (JAXBException e) {
                             e.printStackTrace();
                         }
                     }

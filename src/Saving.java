@@ -10,7 +10,7 @@ import java.util.Vector;
  * Created by Dan on 14-Jun-17.
  */
 
-
+//https://stackoverflow.com/questions/33759441/delete-a-node-and-its-elements-from-an-xml-file-in-java
 public class Saving {
     //unmarshal
     public static EventList loadEventList() throws JAXBException {
@@ -29,6 +29,10 @@ public class Saving {
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(eventList,file);
+    }
+    public static void cleanEventList(){
+        File file = new File("D://file.xml");
+
     }
 
     public  static void main(String[] args) throws Exception {
