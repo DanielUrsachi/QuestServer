@@ -11,11 +11,12 @@ import java.util.Vector;
  * Created by Dan on 11-Jun-17.
  */
 public class ServerSide {
-    public static Vector<String> groups;
+
     //public EventList eventList;
 
+
     public static void main(String[] args) {
-        Vector<String> groups = new Vector<>();
+
 
         //EventList eventList = new EventList();
 
@@ -43,6 +44,10 @@ public class ServerSide {
                         eventList = Saving.loadEventList();
 
                         Event event = (Event) ois.readObject();
+
+                        Vector<String> groups = new Vector<>();
+                        groups = eventList.getNames();
+
                         if(!groups.contains(event.getName())){
                             groups.add(event.getName());
                             eventList.addEventListItem(event);
