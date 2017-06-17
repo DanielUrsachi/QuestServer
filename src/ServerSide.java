@@ -1,7 +1,10 @@
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.Vector;
 
 /**
@@ -9,13 +12,15 @@ import java.util.Vector;
  */
 public class ServerSide {
     public static Vector<String> groups;
-    public EventList eventList;
+    //public EventList eventList;
 
     public static void main(String[] args) {
         Vector<String> groups = new Vector<>();
 
-        EventList eventList = new EventList();
-    Saving.cleanEventList();
+        //EventList eventList = new EventList();
+
+            //Saving.cleanEventList();
+
 
 
         try {
@@ -34,6 +39,9 @@ public class ServerSide {
                 Thread t = new Thread(()->{
                     //Object msg = ois.readObject();
                     try {
+                        EventList eventList = new EventList();
+                        eventList = Saving.loadEventList();
+
                         Event event = (Event) ois.readObject();
                         if(!groups.contains(event.getName())){
                             groups.add(event.getName());
@@ -42,6 +50,18 @@ public class ServerSide {
                             //System.out.println(event.getPass(1));
                             out.writeUTF("succes");
                             Saving.saveEventList(eventList);
+
+
+                            String s = in.readUTF();
+                            if(s.equals("delete")){
+                                System.out.println("delete");
+                                Vector<Event> v1 = eventList.getEventList();
+                                v1.remove(event);
+                                eventList.setEventList(v1);
+                                Saving.saveEventList(eventList);
+                            }
+
+
                             //ServerGroups.sendInfo(eventList);
                             //ServerGroup.Group(event.getName());
 

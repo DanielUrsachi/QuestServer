@@ -30,8 +30,13 @@ public class Saving {
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         jaxbMarshaller.marshal(eventList,file);
     }
-    public static void cleanEventList(){
+    public static void cleanEventList() throws JAXBException{
         File file = new File("D://file.xml");
+        EventList eventList = null;
+        JAXBContext jaxbContext = JAXBContext.newInstance(EventList.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        jaxbMarshaller.marshal(eventList,file);
 
     }
 
@@ -47,7 +52,7 @@ public class Saving {
         strings.add("pas1");
         strings.add("pas2");
 
-        Event event1 = new Event("nume",strings,20,2);
+        Event event1 = new Event("nume",strings, strings,20,2);
         eventList.addEventListItem(event1);
 
         ///
@@ -55,7 +60,7 @@ public class Saving {
         strings2.add("pas100");
         strings2.add("pasword");
 
-        Event event2 = new Event("nume00",strings2,2000,2);
+        Event event2 = new Event("nume00",strings2, strings2,2000,2);
         eventList.addEventListItem(event2);
 
 

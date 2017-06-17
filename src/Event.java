@@ -15,15 +15,17 @@ public class Event implements Serializable {
     private int time;
     private int nr;
     private int etapa;
+    public Vector<String> hints ;
     public Vector<String> passes ;
 
 
-    Event(String name, Vector<String> passes, int time, int nr){
+    Event(String name, Vector<String> hints, Vector<String> passes, int time, int nr){
         this.name = name;
         this.time = time;
         this.nr = nr;
         this.etapa = 0;
         this.passes = passes;
+        this.hints = hints;
 
     }
     Event(){
@@ -31,6 +33,7 @@ public class Event implements Serializable {
         this.time = 0;
         this.nr = 0;
         this.etapa = 0;
+        this.hints = new Vector<String>();
         this.passes = new Vector<String>();
 
     }
@@ -48,13 +51,17 @@ public class Event implements Serializable {
         this.nr = this.passes.size();
 
     }
+    public void setHint(String hint){
+        this.hints.addElement(hint);
+    }
     public void setPass(String pass){
         this.passes.addElement(pass);
-        this.nr = this.passes.size();
+        //this.nr = this.passes.size();
     }
     public void setNr(int nr){
         this.nr = nr;
     }
+
 
     public void showEvent(){
         System.out.println("------------");
@@ -62,17 +69,24 @@ public class Event implements Serializable {
         System.out.println("Time : " + this.time);
         System.out.println("Etapa : " + this.etapa);
         System.out.println("Nr : " + this.nr);
+        System.out.println("Hints : ");
+        for (Object e : this.hints) {
+            System.out.println(e);
+            
+        }
         System.out.println("Passes : ");
         for (Object e : this.passes) {
             System.out.println(e);
-            
+
         }
 
     }
 
     public String getPass( int i){
         return this.passes.get(i-1);
-
+    }
+    public String getHint( int i){
+        return this.hints.get(i-1);
     }
     public String getName(){
 

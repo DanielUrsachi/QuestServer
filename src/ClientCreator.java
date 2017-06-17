@@ -21,6 +21,10 @@ public class ClientCreator implements Serializable {
         System.out.println("Nr repetari");
         int nr = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < nr; i++){
+            System.out.println("Hint etapa " + (i+1) + " : " );
+            event.setHint(sc.nextLine());
+        }
+        for (int i = 0; i < nr; i++){
             System.out.println("Pass etapa " + (i+1) + " : " );
             event.setPass(sc.nextLine());
         }
@@ -63,6 +67,9 @@ public class ClientCreator implements Serializable {
                     String msg2 = in.readUTF();
                     if (msg2.equals("succes")){
                         System.out.println(event.getName() + " a este inregitrat");
+                        String s = sc.nextLine();
+                        out.writeUTF(s);//exit
+
                     }
                     if (msg2.equals("eroare")){
                         System.out.println(event.getName() + " este deja ocupat");
