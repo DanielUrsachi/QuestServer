@@ -1,8 +1,3 @@
 <resources>
     <string name="app_name">QuestClient</string>
-    <string-array name="types">
-        <item>Mobile</item>
-        <item>Office</item>
-        <item>Home</item>
-    </string-array>
 </resources>
