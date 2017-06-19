@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.Vector;
+import com.example.dan.questclient.Event;
 
 /**
  * Created by Dan on 11-Jun-17.
@@ -25,7 +26,7 @@ public class Client {
 
             Scanner sc = new Scanner(System.in);
 
-                Vector<String> v  = (Vector<String>) ois.readObject();
+            Vector<String> v  = (Vector<String>) ois.readObject();
             for (String vv:v) {
                 System.out.println(" - " + vv);
             }
@@ -44,7 +45,7 @@ public class Client {
 //                out.flush();
 
 
-               // Thread.sleep(10000);
+                // Thread.sleep(10000);
 
                 String msg2 = in.readUTF();
                 System.out.println("return from server: " + msg2 );

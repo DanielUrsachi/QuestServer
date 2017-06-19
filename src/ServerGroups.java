@@ -3,20 +3,21 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
+import com.example.dan.questclient.Event;
 
 /**
  * Created by Dan on 13-Jun-17.
  */
 public class ServerGroups {
-   // public Vector<String> groups = new Vector<String>();;
-   // public static EventList eventList = new EventList();;
+    // public Vector<String> groups = new Vector<String>();;
+    // public static EventList eventList = new EventList();;
 
 
 
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
 
-       // Vector<String> groups = new Vector<>();
+        // Vector<String> groups = new Vector<>();
 
         //EventList eventList = new EventList();
 

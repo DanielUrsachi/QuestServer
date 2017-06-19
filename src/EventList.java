@@ -2,6 +2,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Vector;
+import com.example.dan.questclient.Event;
 
 /**
  * Created by Dan on 14-Jun-17.

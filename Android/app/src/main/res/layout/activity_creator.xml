@@ -11,16 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/timeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
-        android:text="Time(Minutes)" />
+        android:hint="Time(Minutes)"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/createRoomB"
@@ -39,16 +39,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:inputType="text"
-            android:text="Hint" />
+            android:hint="Hint"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/edit_text2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:inputType="text"
-            android:text="Pass" />
+            android:hint="Pass"
+            android:inputType="text" />
 
 
         <Button

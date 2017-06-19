@@ -4,6 +4,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Vector;
+import com.example.dan.questclient.Event;
 
 
 /**
@@ -52,16 +53,16 @@ public class Saving {
         strings.add("pas1");
         strings.add("pas2");
 
-        Event event1 = new Event("nume",strings, strings,20,2);
-        eventList.addEventListItem(event1);
-
-        ///
-        Vector<String> strings2 = new Vector<String>();
-        strings2.add("pas100");
-        strings2.add("pasword");
-
-        Event event2 = new Event("nume00",strings2, strings2,2000,2);
-        eventList.addEventListItem(event2);
+//        Event event1 = new Event("nume",strings, strings,20,2);
+//        eventList.addEventListItem(event1);
+//
+//        ///
+//        Vector<String> strings2 = new Vector<String>();
+//        strings2.add("pas100");
+//        strings2.add("pasword");
+//
+//        Event event2 = new Event("nume00",strings2, strings2,2000,2);
+//        eventList.addEventListItem(event2);
 
 
 
@@ -74,7 +75,7 @@ public class Saving {
 
         //unmarshal
         EventList eventList2 = new EventList();
-       eventList2 = loadEventList();
+        eventList2 = loadEventList();
 
         /*Event books = new Event();
 
@@ -84,7 +85,7 @@ public class Saving {
         books.showEvent();
 */
 
-         //books.getBooks();
+        //books.getBooks();
 
 
 //        Unmarshaller um = jaxbContext.createUnmarshaller();

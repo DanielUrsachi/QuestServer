@@ -1,14 +1,12 @@
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+package com.example.dan.questclient;
 import java.io.Serializable;
 import java.util.Vector;
+
 
 /**
  * Created by Dan on 11-Jun-17.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "event")
+
 public class Event implements Serializable {
 
     private String name;
@@ -72,7 +70,7 @@ public class Event implements Serializable {
         System.out.println("Hints : ");
         for (Object e : this.hints) {
             System.out.println(e);
-            
+
         }
         System.out.println("Passes : ");
         for (Object e : this.passes) {

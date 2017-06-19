@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.Vector;
+import com.example.dan.questclient.Event;
 
 /**
  * Created by Dan on 11-Jun-17.
@@ -20,7 +21,7 @@ public class ServerSide {
 
         //EventList eventList = new EventList();
 
-            //Saving.cleanEventList();
+        //Saving.cleanEventList();
 
 
 

@@ -9,16 +9,16 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:inputType="text"
-        android:text="Hint" />
+        android:hint="Hint"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_text2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:inputType="text"
-        android:text="Pass" />
+        android:hint="Pass"
+        android:inputType="text" />
     <Button
         android:id="@+id/delete_button"
         android:layout_width="0dp"

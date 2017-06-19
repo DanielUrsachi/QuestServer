@@ -14,9 +14,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import static android.R.attr.id;
 
-public class CreatorActivity extends AppCompatActivity {
+public class CreatorActivity extends AppCompatActivity implements Serializable {
 
     private LinearLayout parentLinearLayout;
     public int nr = 1;
@@ -55,10 +57,16 @@ public class CreatorActivity extends AppCompatActivity {
         nr--;
     }
     public void onCreate(View v) {
+        Event event = new Event();
         System.out.println(nr);
         System.out.println(parentLinearLayout.getChildCount());
         System.out.println(nameText.getText());
         System.out.println(timeText.getText());
+        ///
+        String name = String.valueOf(nameText.getText());
+        event.setName(String.valueOf(nameText.getText()));
+        event.setTime(Integer.parseInt(String.valueOf(timeText.getText())));
+        event.setNr(nr);
 
         if (nr >= 1){
             for (int i = 3; i < nr+3; i++){
@@ -66,20 +74,37 @@ public class CreatorActivity extends AppCompatActivity {
                 edit_text2 = (EditText) parentLinearLayout.getChildAt(i).findViewById(R.id.edit_text2);//aista lucreaza
                 System.out.println(edit_text.getText());
                 System.out.println(edit_text2.getText());
+                ///
+                event.setHint(String.valueOf(edit_text.getText()));
+                event.setPass(String.valueOf( edit_text2.getText()));
             }
-//            edit_text = (EditText) parentLinearLayout.getChildAt(3).findViewById(R.id.edit_text);//aista lucreaza
-//            System.out.println(edit_text.getText());
-//            edit_text = (EditText) parentLinearLayout.getChildAt(4).findViewById(R.id.edit_text);//aista lucreaza
-//            System.out.println(edit_text.getText());
-//            edit_text = (EditText) parentLinearLayout.getChildAt(5).findViewById(R.id.edit_text);//aista lucreaza
-//            System.out.println(edit_text.getText());
+//
         }else if(nr == 1) {
             edit_text = (EditText)findViewById(R.id.edit_text);
             System.out.println(edit_text.getText());
             System.out.println(edit_text2.getText());
+            ///
+            event.setHint(String.valueOf(edit_text.getText()));
+            event.setPass(String.valueOf( edit_text2.getText()));
         }else {
             System.out.println("Eroare");
         }
+
+        if(nr>=1){
+            //ClientCreator.sendCreator(event);
+            //ClientCreator.sendCreator(event);
+            ClientCreator clientCreator = (ClientCreator) new ClientCreator(event).execute("");
+            //nu primeste rs
+            if (clientCreator.getrequest() == -1){
+                System.out.println("UI: ocupat!");
+            }if (clientCreator.getrequest() == 1){
+                System.out.println("UI: inregistrat");
+            }
+
+
+        }
+
+
 
 
 
