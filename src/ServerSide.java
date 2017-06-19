@@ -11,13 +11,13 @@ import com.example.dan.questclient.Event;
 /**
  * Created by Dan on 11-Jun-17.
  */
-public class ServerSide {
-    public static void main(String[] args) {
+public class ServerSide extends Server{
+    public static void runServerSide() {
 
         try {
-            int port = 7878;
+            int port = Server.portSS;
             ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("TCP server running on port " + port);
+            System.out.println("ServerSide for registering on port " + port);
 
             while (true) {
                 Socket socket = serverSocket.accept();
@@ -40,11 +40,11 @@ public class ServerSide {
                                 if (!groups.contains(event.getName())) {
                                     groups.add(event.getName());
                                     eventList.addEventListItem(event);
-                                    System.out.println(event.getName() + " a fost inregistrat cu succes");
+                                    System.out.println("ServerSide: " + event.getName() + " a fost inregistrat cu succes");
                                     out.writeUTF("succes");
                                     Saving.saveEventList(eventList);
                                 } else {
-                                    System.out.println(event.getName() + " este deja ocupat");
+                                    System.out.println("ServerSide: " + event.getName() + " este deja ocupat");
                                     out.writeUTF("eroare");
                                 }
                             }
