@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextClock;
+
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,18 +20,27 @@ import java.util.concurrent.ExecutionException;
 public class ParticipantActivity extends AppCompatActivity {
     Intent intent;
     TextView clientHint;
-    TextClock textClock;
+    TextView clientNume;
+    TextView clientTimp;
+    TextView clientEtapa;
     EditText clientPass;
     CountDownTimer c;
     public Event event;
-    int i;
+
+
+    ProgressBar mProgressBar;
+    CountDownTimer mCountDownTimer;
+    final int[] i = {0};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant);
 
         TextView clientHint = (TextView)findViewById(R.id.clientHint);
-        TextClock textClock = (TextClock)findViewById(R.id.textClock);
+        TextView clientNume = (TextView)findViewById(R.id.clientNume);
+        TextView clientTimp = (TextView)findViewById(R.id.clientTimp);
+        TextView clientEtapa = (TextView)findViewById(R.id.clientEtapa);
         EditText clientPass = (EditText)findViewById(R.id.clientPass);
 
         Intent intent = getIntent();
@@ -49,26 +60,47 @@ public class ParticipantActivity extends AppCompatActivity {
 
         this.event = client.getEvent();
         this.event.showEvent();
-//        String timeStamp = new SimpleDateFormat("mm").format(Calendar.getInstance().getTime());
-//        System.out.println(timeStamp);
 
-        //textClock.setText(timeStamp);
+        clientNume.setText(event.getName());
 
 
-        this.i = this.event.getTime();
-        System.out.println(this.i);
-        c = new CountDownTimer(40000, 1000) { //40000 milli seconds is total time, 1000 milli seconds is time interval
 
+
+        mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
+
+
+        setTimer(this.event.getTime());
+        //c.start();
+        mCountDownTimer.start();
+
+    }
+    public void showTime(int nr){
+//        TextView clientTimp = (TextView)findViewById(R.id.clientTimp);
+//        clientTimp.setText(nr);
+    }
+    public void setTimer(final int time){
+        mProgressBar.setMax(time);
+        mProgressBar.setProgress(i[0]);
+        mCountDownTimer=new CountDownTimer(time*1000,1000) {
+
+            @Override
             public void onTick(long millisUntilFinished) {
-                System.out.println("aaaa");
+                Log.v("Log_tag", "Tick of Progress"+ i[0] + millisUntilFinished);
+                i[0]++;
+                mProgressBar.setProgress(i[0]);
+
             }
+
+            @Override
             public void onFinish() {
+                //Do what you want
+                i[0]++;
+                mProgressBar.setProgress(i[0]);
                 Toast toast = Toast.makeText(getApplicationContext(), "You loose", Toast.LENGTH_SHORT);
                 toast.show();
             }
         };
 
-        c.start();
 
 
     }
