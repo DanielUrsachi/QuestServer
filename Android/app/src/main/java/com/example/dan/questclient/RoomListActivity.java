@@ -69,7 +69,7 @@ public class RoomListActivity extends AppCompatActivity {
                 //String selected = (String) listView.getSelectedItem();
                 String selected  = (String) adapter.getItem(position);
                 System.out.println(selected);
-                
+
 
                 intent.putExtra("name",selected);
                 startActivity(intent);

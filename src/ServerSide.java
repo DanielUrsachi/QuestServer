@@ -40,10 +40,34 @@ public class ServerSide {
 
                 Thread t = new Thread(()->{
                     //Object msg = ois.readObject();
-                    try {
-                        EventList eventList = new EventList();
-                        eventList = Saving.loadEventList();
+                    while (true) {
+                        try {
+                            EventList eventList = new EventList();
+                            eventList = Saving.loadEventList();
+                            Event event;
+                            Vector<String> groups = new Vector<>();
 
+                            String msg2 = in.readUTF();
+                            if (msg2.equals("add")) {
+                                event = (Event) ois.readObject();
+                                groups = eventList.getNames();
+                                if (!groups.contains(event.getName())) {
+                                    groups.add(event.getName());
+                                    eventList.addEventListItem(event);
+                                    System.out.println(event.getName() + " a fost inregistrat cu succes");
+                                    //System.out.println(event.getPass(1));
+                                    out.writeUTF("succes");
+                                    Saving.saveEventList(eventList);
+                                } else {
+                                    System.out.println(event.getName() + " este deja ocupat");
+                                    out.writeUTF("eroare");
+                                }
+                            }
+                            if (msg2.equals("end")) {
+                                break;
+                            }
+///
+/*
                         Event event = (Event) ois.readObject();
 
                         Vector<String> groups = new Vector<>();
@@ -76,15 +100,16 @@ public class ServerSide {
                             System.out.println(event.getName() + " este deja ocupat");
                             out.writeUTF("eroare");
                         }
+*/
 
 
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (JAXBException e) {
-                        e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (JAXBException e) {
+                            e.printStackTrace();
+                        }
                     }
 
 

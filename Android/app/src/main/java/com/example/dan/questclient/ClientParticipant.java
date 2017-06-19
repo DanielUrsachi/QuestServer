@@ -40,12 +40,14 @@ public class ClientParticipant extends AsyncTask<String, Void, String> {
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
+
             out.writeUTF("object " + this.getName() );
             out.flush();
             //Thread.sleep(4000);
              event = (Event) ois.readObject();
             if(event != null){
                 out.writeUTF("end");
+                out.flush();
             }
 
 

@@ -29,6 +29,7 @@ public class Client extends AsyncTask<String, Void, String> {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
             out.writeUTF("list");
+            out.flush();
 
             vector  = (Vector<String>) ois.readObject();
 

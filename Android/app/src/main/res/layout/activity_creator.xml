@@ -26,7 +26,7 @@
         android:id="@+id/createRoomB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onCreate"
+        android:onClick="onCreateRoom"
         android:text="Create" />
 
     <LinearLayout
@@ -55,7 +55,7 @@
             android:id="@+id/delete_button"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="0.71"
+            android:layout_weight="1.06"
             android:background="@android:drawable/ic_delete"
             android:onClick="onDelete" />
     </LinearLayout>

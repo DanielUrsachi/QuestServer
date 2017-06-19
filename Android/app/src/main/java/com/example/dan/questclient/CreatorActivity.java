@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 import static android.R.attr.id;
 
@@ -29,34 +31,26 @@ public class CreatorActivity extends AppCompatActivity implements Serializable {
     public  View rowView;
     LayoutInflater inflater;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creator);
         parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
-
         nameText = (TextView)findViewById(R.id.nameText);
         timeText = (TextView)findViewById(R.id.timeText);
-
     }
     public void onAddField(View v) {
          inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
          rowView = inflater.inflate(R.layout.field, null);
         // Add the new row before the add field button.
-
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
-
         nr++;
-
-
     }
-
     public void onDelete(View v) {
         parentLinearLayout.removeView((View) v.getParent());
         nr--;
     }
-    public void onCreate(View v) {
+    public void onCreateRoom(View v) {
         Event event = new Event();
         System.out.println(nr);
         System.out.println(parentLinearLayout.getChildCount());
@@ -87,33 +81,34 @@ public class CreatorActivity extends AppCompatActivity implements Serializable {
             event.setHint(String.valueOf(edit_text.getText()));
             event.setPass(String.valueOf( edit_text2.getText()));
         }else {
-            System.out.println("Eroare");
+            Toast toast = Toast.makeText(getApplicationContext(), "Adaugati macar un element", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
+        //final
         if(nr>=1){
-            //ClientCreator.sendCreator(event);
-            //ClientCreator.sendCreator(event);
-            ClientCreator clientCreator = (ClientCreator) new ClientCreator(event).execute("");
-            //nu primeste rs
-            if (clientCreator.getrequest() == -1){
-                System.out.println("UI: ocupat!");
-            }if (clientCreator.getrequest() == 1){
-                System.out.println("UI: inregistrat");
+            ClientCreator clientCreator = new ClientCreator();
+            clientCreator.setEvent(event);
+
+            try {
+                clientCreator.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-
-
+            if(clientCreator.getRequest() == 1){
+                Toast toast = Toast.makeText(getApplicationContext(), "Grupa a fost inregistrata cu succes", Toast.LENGTH_SHORT);
+                toast.show();
+            }else if(clientCreator.getRequest() == 0){
+                Toast toast = Toast.makeText(getApplicationContext(), "Acest nume este deja ocupat", Toast.LENGTH_SHORT);
+                toast.show();
+            }else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Grupa nu este inregistrata, avem o problema de retea", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
-
-
-
-
-
-
-
-
 
     }
-
-
 
 }

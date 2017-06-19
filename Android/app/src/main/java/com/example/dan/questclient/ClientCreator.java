@@ -21,13 +21,16 @@ import java.util.Vector;
 public class ClientCreator extends AsyncTask<String, Void, String> {
     public Event event;
     public int request;
-    public ClientCreator(Event event){
+    public void setEvent(Event event){
         this.event = event;
-        this.request = 0;
 
     }
-    public int getrequest(){
+
+    public int getRequest(){
         return this.request;
+    }
+    public void setRequest(int request){
+        this.request = request;
     }
 
 
@@ -54,6 +57,7 @@ public class ClientCreator extends AsyncTask<String, Void, String> {
     public void sendCreator(){
         //System.out.println(event.getPass(1));
 
+
         try {
             InetAddress ip = InetAddress.getByName("10.0.2.2");
             int port = 7878;
@@ -64,7 +68,23 @@ public class ClientCreator extends AsyncTask<String, Void, String> {
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            Scanner sc = new Scanner(System.in);
+            out.writeUTF("add");
+            out.flush();
+
+            oos.writeObject(this.event);
+            oos.flush();
+
+            String msg = in.readUTF();
+            System.out.println(msg);
+            if (msg.equals("succes")){
+                setRequest(1);
+                out.writeUTF("end");
+            }else if(msg.equals("eroare")){
+                setRequest(0);
+                out.writeUTF("end");
+            }
+
+
             // while (true) {
 //                System.out.println("Type your msg: ");
 //                String msg = sc.nextLine();
@@ -78,15 +98,16 @@ public class ClientCreator extends AsyncTask<String, Void, String> {
 //            strings.add("pas2");
 //
 //            Event event = new Event("nume",strings, strings,20,2);
-            oos.writeObject(this.event);
+            /////////
+           /* oos.writeObject(this.event);
 
 
             while (true){
                 String msg2 = in.readUTF();
                 if (msg2.equals("succes")){
                     System.out.println(event.getName() + " a este inregitrat");
-                    String s = sc.nextLine();
-                    out.writeUTF(s);//exit
+                    //String s = sc.nextLine();
+                    //out.writeUTF(s);//exit
                     this.request = 1;
 
                 }
@@ -96,7 +117,7 @@ public class ClientCreator extends AsyncTask<String, Void, String> {
                 }
 
 
-            }
+            }*/
 
             // }
 
