@@ -21,10 +21,7 @@ public class Client extends AsyncTask<String, Void, String> {
         try {
             InetAddress ip = InetAddress.getByName("10.0.2.2");
             int port = 7879;
-
             Socket socket = new Socket(ip, port);
-
-            DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
@@ -38,31 +35,18 @@ public class Client extends AsyncTask<String, Void, String> {
                 out.flush();
             }
 
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         this.names = vector;
     }
-    public void setNames2(){
-        Vector<String> v1 = new Vector<String>();
-        v1.add("aa");
-        v1.add("bb");
-        v1.add("cc");
-        this.names = v1;
-    }
+
     public Vector<String> getNames2(){
         return this.names;
     }
     @Override
     protected String doInBackground(String... params) {
-        //System.out.println(getNames().get(0));
         this.setNames();
-        System.out.println("am fost aici");
-
         return null;
     }
 

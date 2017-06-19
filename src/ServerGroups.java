@@ -9,24 +9,9 @@ import com.example.dan.questclient.Event;
  * Created by Dan on 13-Jun-17.
  */
 public class ServerGroups {
-    // public Vector<String> groups = new Vector<String>();;
-    // public static EventList eventList = new EventList();;
 
-
-
-    @SuppressWarnings("Duplicates")
     public static void main(String[] args) {
 
-        // Vector<String> groups = new Vector<>();
-
-        //EventList eventList = new EventList();
-
-
-
-
-
-        String nume1 = "nume1";
-        String nume2 = "nume2";
         try {
             int port = 7879;
             ServerSocket serverSocket = new ServerSocket(port);
@@ -62,35 +47,6 @@ public class ServerGroups {
                                 Event event = eventList.getElementListName(o);
                                 oos.writeObject(event);
                             }
-
-
-
-
-
-//                            String msg = in.readUTF();
-//                            System.out.println(" Room -->" + msg);
-//                            Event event = eventList.getElementListName(msg);
-//                            oos.writeObject(event);
-
-                            /*if (msg.equals("nume1")){
-                                System.out.println("primuuuuuu");
-                                Thread.sleep(10000);
-                                out.writeUTF("primu!" );
-
-                            }
-                            if (msg.equals("nume2")){
-                                System.out.println("doileeaaaa");
-                                Thread.sleep(1000);
-                                out.writeUTF("doilea!" );
-
-                            }*/
-
-
-
-                            //out.writeUTF("citit dvajdi!:" + msg);
-
-
-
                         } catch (IOException e) {
                             e.printStackTrace();
 

@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createB.setOnClickListener(this);
         joinB.setOnClickListener(this);
 
-
-
     }
 
     @Override

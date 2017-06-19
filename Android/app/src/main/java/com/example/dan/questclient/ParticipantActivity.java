@@ -13,16 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.Vector;
+
 import java.util.concurrent.ExecutionException;
 
-import static android.R.id.progress;
+
 
 public class ParticipantActivity extends AppCompatActivity {
-    Intent intent;
     TextView clientHint;
     TextView clientNume;
     TextView clientTime;
@@ -50,14 +46,10 @@ public class ParticipantActivity extends AppCompatActivity {
         TextView clientEtapa = (TextView) findViewById(R.id.clientEtapa);
         TextView clientNr = (TextView) findViewById(R.id.clientNr);
         EditText clientPass = (EditText) findViewById(R.id.clientPass);
-
-
         Button nextButton = (Button) findViewById(R.id.nextButton);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        System.out.println("activity nou " + name);
-
 
         ClientParticipant client = new ClientParticipant();
         client.setName(name);
@@ -79,15 +71,10 @@ public class ParticipantActivity extends AppCompatActivity {
         clientNr.setText(Integer.toString(this.event.getNr()));
 
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-
         setTimer(this.event.getTime());
-        //c.start();
         mCountDownTimer.start();
 
     }
-
-
 
     public void setTimer(final int time) {
         final TextView clientTime = (TextView)findViewById(R.id.clientTime);;
@@ -101,19 +88,12 @@ public class ParticipantActivity extends AppCompatActivity {
                 i[0]++;
                 mProgressBar.setProgress(i[0]);
                 clientTime.setText(Integer.toString(i[0]));
-
-
-
             }
-
             @Override
             public void onFinish() {
-                //Do what you want
-
                 mProgressBar.setProgress(0);
                 Toast toast = Toast.makeText(getApplicationContext(), "You loose", Toast.LENGTH_SHORT);
                 toast.show();
-
             }
         };
 
@@ -127,16 +107,12 @@ public class ParticipantActivity extends AppCompatActivity {
         if(s.equals(event.getPass(event.getEtapa()+1))){
             Toast toast = Toast.makeText(getApplicationContext(), "Corect!!!", Toast.LENGTH_SHORT);
             toast.show();
-
             if(event.getEtapa()<event.getNr()-1){
-                int et = event.getEtapa()+1;//0->1
+                int et = event.getEtapa()+1;
                 event.setEtapa(et);
 
                 clientEtapa.setText(Integer.toString(et+1));
                 clientHint.setText(this.event.getHint(et+1));
-
-
-
 
                 mCountDownTimer.cancel();
                 setTimer(this.event.getTime());
@@ -148,28 +124,14 @@ public class ParticipantActivity extends AppCompatActivity {
 
                 toast.show();
                 mCountDownTimer.cancel();
-
             }
-
-
-
-
-
         }
-
-
-
-
-
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Incorect!!!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
-
-
     public void onClick(View v) {
-
-
-
                 check();
-
-
     }
 }
