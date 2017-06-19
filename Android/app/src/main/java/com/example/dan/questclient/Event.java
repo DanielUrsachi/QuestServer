@@ -91,7 +91,6 @@ public class Event implements Serializable {
         return this.name;
     }
     public int getEtapa(){
-
         return this.etapa;
     }
     public int getNr(){

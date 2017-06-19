@@ -69,9 +69,7 @@ public class RoomListActivity extends AppCompatActivity {
                 //String selected = (String) listView.getSelectedItem();
                 String selected  = (String) adapter.getItem(position);
                 System.out.println(selected);
-
-                Toast toast = Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT);
-                toast.show();
+                
 
                 intent.putExtra("name",selected);
                 startActivity(intent);
