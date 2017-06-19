@@ -20,7 +20,7 @@ import java.util.Vector;
 
 public class ClientCreator extends AsyncTask<String, Void, String> {
     public Event event;
-    public int request = 0;
+    public int request;
     public ClientCreator(Event event){
         this.event = event;
         this.request = 0;

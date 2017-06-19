@@ -45,14 +45,32 @@ public class ServerGroups {
                             EventList eventList = Saving.loadEventList();
                             Vector<String> v = eventList.getNames();
 
-                            oos.writeObject(v);
-
-
 
                             String msg = in.readUTF();
-                            System.out.println(" Room -->" + msg);
-                            Event event = eventList.getElementListName(msg);
-                            oos.writeObject(event);
+                            if(msg.equals("list")){
+                                oos.writeObject(v);
+                                oos.flush();
+                            }
+                            if(msg.equals("end")){
+                                break;
+                            }
+                            if(msg.startsWith("object")){
+                                System.out.println("object!");
+                                String arr[] = msg.split(" ", 2);
+                                String o = arr[1];
+                                System.out.println(o);
+                                Event event = eventList.getElementListName(o);
+                                oos.writeObject(event);
+                            }
+
+
+
+
+
+//                            String msg = in.readUTF();
+//                            System.out.println(" Room -->" + msg);
+//                            Event event = eventList.getElementListName(msg);
+//                            oos.writeObject(event);
 
                             /*if (msg.equals("nume1")){
                                 System.out.println("primuuuuuu");
