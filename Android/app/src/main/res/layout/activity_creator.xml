@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Time(Minutes)"
+        android:hint="Time(Sec)"
         android:inputType="number" />
 
     <Button

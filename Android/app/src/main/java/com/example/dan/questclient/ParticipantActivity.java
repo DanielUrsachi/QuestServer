@@ -87,7 +87,7 @@ public class ParticipantActivity extends AppCompatActivity {
                 Log.v("Log_tag", "Tick of Progress" + i[0] + millisUntilFinished);
                 i[0]++;
                 mProgressBar.setProgress(i[0]);
-                clientTime.setText(Integer.toString(i[0]));
+                clientTime.setText(Integer.toString(event.getTime() - i[0]));
             }
             @Override
             public void onFinish() {
